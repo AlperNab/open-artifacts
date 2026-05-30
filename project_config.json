@@ -1,0 +1,362 @@
+{
+  "slug": "open-artifacts",
+  "name": "Open Artifacts",
+  "domain": "AI Platform / Artifact Runtime",
+  "target_user": "Domain operator, business owner, analyst, or team member who needs this workflow executed reliably.",
+  "core_job": "AI-generated artifacts → self-hosted runtime",
+  "deep_features": [
+    "sandbox execution",
+    "file storage",
+    "component gallery",
+    "permissions",
+    "package allowlist",
+    "workspace sharing",
+    "version history",
+    "embedding API"
+  ],
+  "input_schema": [
+    {
+      "key": "ai_generated_artifacts",
+      "label": "AI-generated artifacts",
+      "type": "text",
+      "required": true,
+      "help": "Affects input: AI-generated artifacts.",
+      "affects": [
+        "prompt",
+        "workflow"
+      ],
+      "default": ""
+    },
+    {
+      "key": "work_brief",
+      "label": "Work brief / source text / URL / instructions",
+      "type": "textarea",
+      "required": true,
+      "default": "",
+      "help": "Paste the material, URL, description, or instruction needed for this project.",
+      "affects": [
+        "prompt",
+        "workflow"
+      ]
+    }
+  ],
+  "customization_schema": [
+    {
+      "key": "execution_mode",
+      "label": "Execution mode",
+      "type": "select",
+      "required": false,
+      "options": [
+        "Draft",
+        "Production",
+        "Audit / strict review",
+        "JSON/API output"
+      ],
+      "default": "Production",
+      "help": "Controls strictness, depth, and output format for this project workflow.",
+      "affects": [
+        "workflow",
+        "validation",
+        "export"
+      ]
+    },
+    {
+      "key": "runtime_limits",
+      "label": "runtime limits",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: runtime limits.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "allowed_packages",
+      "label": "allowed packages",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: allowed packages.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "auth_provider",
+      "label": "auth provider",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: auth provider.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "storage_backend",
+      "label": "storage backend",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: storage backend.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "tenant_policy",
+      "label": "tenant policy",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: tenant policy.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "branding",
+      "label": "branding",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: branding.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "execution_timeout",
+      "label": "execution timeout",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: execution timeout.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "output_format",
+      "label": "output format",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: output format.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "Markdown",
+        "JSON",
+        "CSV",
+        "PDF",
+        "DOCX",
+        "XLSX"
+      ],
+      "default": "Markdown"
+    },
+    {
+      "key": "language",
+      "label": "language",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: language.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "English",
+        "Arabic",
+        "Egyptian Arabic",
+        "French",
+        "German",
+        "Spanish"
+      ],
+      "default": "English"
+    },
+    {
+      "key": "privacy_mode",
+      "label": "privacy mode",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: privacy mode.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "cloud allowed",
+        "local only",
+        "redact sensitive data"
+      ],
+      "default": "cloud allowed"
+    },
+    {
+      "key": "confidence_threshold",
+      "label": "Confidence threshold",
+      "type": "slider",
+      "required": false,
+      "min": 0,
+      "max": 100,
+      "default": 75,
+      "help": "Items below this confidence are escalated to the human review queue.",
+      "affects": [
+        "validation",
+        "workflow",
+        "export"
+      ]
+    }
+  ],
+  "workflow_steps": [
+    "AI-generated artifacts",
+    "self-hosted runtime"
+  ],
+  "ui_panels": [
+    "artifact workspace",
+    "code/result panes",
+    "file manager",
+    "permissions",
+    "admin logs"
+  ],
+  "output_formats": [
+    "artifact app",
+    "embed link",
+    "code export",
+    "workspace snapshot"
+  ],
+  "integrations": [
+    "File upload",
+    "REST API",
+    "Export download",
+    "Job history",
+    "Hosting/storage optional"
+  ],
+  "guardrails": [
+    "Show uncertainty and confidence",
+    "Cite evidence from input when possible",
+    "Human review required for legal, medical, financial, hiring, or security decisions",
+    "Do not invent facts absent from input"
+  ],
+  "recommended_models": {
+    "drafting": "fast cloud or local instruct model",
+    "reasoning": "strong reasoning model",
+    "private_documents": "local model via Ollama/LM Studio/vLLM",
+    "vision_or_pdf": "vision-capable model when image pages are used"
+  },
+  "suite": "AI Platform Core",
+  "implementation_status": "real_local_engine_registered",
+  "analysis_modules": [
+    "artifact_runtime_spec",
+    "security_review",
+    "deployment_plan"
+  ],
+  "output_sections": [
+    "Runtime config",
+    "Security checks",
+    "Deployment steps",
+    "Artifact manifest"
+  ],
+  "field_validations": [
+    {
+      "field": "language",
+      "rule": "Preserve requested language in final deliverable unless source text requires bilingual output."
+    }
+  ],
+  "scorecards": [
+    "Input completeness",
+    "Domain fit",
+    "Risk level",
+    "Automation readiness",
+    "Export readiness"
+  ],
+  "automation_hooks": [
+    {
+      "name": "save_job_snapshot",
+      "type": "internal",
+      "description": "Persist inputs, customization, uploads, output, and usage for audit/history."
+    },
+    {
+      "name": "export_pack",
+      "type": "internal",
+      "description": "Export Markdown, JSON, PDF, and DOCX from the completed job."
+    },
+    {
+      "name": "human_review_queue",
+      "type": "manual",
+      "description": "Flag low-confidence, legal/medical/finance/security/compliance-sensitive items for human review."
+    }
+  ],
+  "ux_profile": {
+    "name": "AI Platform Control Plane",
+    "accent": "#818cf8",
+    "layout": "Provider/tool intake → routing/security → execution → audit/export",
+    "hero": "Infrastructure UX for provider routing, tools, cost, billing, artifacts, and platform-level operations.",
+    "components": [
+      "Provider routing matrix",
+      "Tool registry",
+      "Cost/billing controls",
+      "Security settings",
+      "Audit trail"
+    ],
+    "metrics": [
+      "Provider readiness",
+      "Cost control",
+      "Security posture",
+      "Execution reliability"
+    ],
+    "quick_actions": [
+      "Configure providers",
+      "Review routing rules",
+      "Check security controls",
+      "Export audit package"
+    ],
+    "review_lanes": [
+      "Configure",
+      "Route",
+      "Execute",
+      "Audit",
+      "Optimize"
+    ],
+    "empty_state": "Configure local/cloud providers or paste a platform workflow. No provider keys are required for Rule Engine mode.",
+    "icon": "🧠",
+    "project_slug": "open-artifacts",
+    "domain": "AI Platform / Artifact Runtime"
+  },
+  "final_gui_status": {
+    "standalone_folder_gui": true,
+    "domain_specific_ux_profile": true,
+    "elegant_component_system": true,
+    "no_fake_live_data_policy": true,
+    "requires_real_connectors_for_external_actions": true
+  }
+}
