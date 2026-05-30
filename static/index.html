@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Project GUI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar glass">
+      <div class="brandBlock">
+        <div class="logo" id="domainIcon">AI</div>
+        <div><h1 id="brandTitle">Project GUI</h1><p id="brandSub">Standalone real project workspace</p></div>
+      </div>
+      <div class="searchWrap"><input id="search" placeholder="Search projects, domains, workflows..."></div>
+      <div class="domainFilter" id="domainFilter"></div>
+      <div class="projectList" id="projectList"></div>
+    </aside>
+
+    <main class="workspace">
+      <section class="hero glass">
+        <div class="heroText">
+          <div class="crumb" id="projectSuite">Loading suite...</div>
+          <h2 id="projectTitle">Loading...</h2>
+          <p id="projectMeta"></p>
+        </div>
+        <div class="heroActions">
+          <select id="providerSelect"></select>
+          <button class="secondary" id="settingsBtn">Provider Settings</button>
+        </div>
+      </section>
+
+      <section class="uxStrip glass">
+        <div class="uxInfo"><span id="uxName"></span><small id="uxLayout"></small></div>
+        <div class="laneRail" id="laneRail"></div>
+      </section>
+
+      <section class="metricGrid" id="metricGrid"></section>
+
+      <section class="mainGrid">
+        <div class="stack">
+          <section class="panel glass">
+            <div class="panelHead"><div><h3>Project Inputs</h3><p>Only fields related to this project are shown.</p></div><span class="pill" id="inputCount"></span></div>
+            <form id="inputForm" class="formGrid"></form>
+            <div class="uploadCard">
+              <div><b>Upload related files</b><p>PDF, DOCX, XLSX, TXT, CSV, code, logs, images metadata.</p></div>
+              <input type="file" id="fileInput" multiple>
+              <div id="uploadedFiles" class="status"></div>
+            </div>
+          </section>
+
+          <section class="panel glass">
+            <div class="panelHead"><div><h3 id="cockpitTitle">Domain Cockpit</h3><p id="cockpitSub">Project-specific components and review surfaces.</p></div></div>
+            <div id="domainCockpit" class="componentGrid"></div>
+          </section>
+        </div>
+
+        <div class="stack">
+          <section class="panel glass">
+            <div class="panelHead"><div><h3>Customization</h3><p>Controls affect workflow, strictness, format, and validation.</p></div><span class="pill" id="customCount"></span></div>
+            <form id="customForm" class="formGrid"></form>
+          </section>
+
+          <section class="panel glass">
+            <div class="tabs"><button class="tab active" data-tab="features">Features</button><button class="tab" data-tab="guardrails">Guardrails</button><button class="tab" data-tab="validation">Validation</button><button class="tab" data-tab="history">History</button></div>
+            <div class="tabPane active" id="tab-features"><div class="chipCloud" id="featureChips"></div><h4>Implementation Modules</h4><div class="chipCloud" id="moduleChips"></div><h4>Output Contract</h4><div class="chipCloud" id="outputSections"></div></div>
+            <div class="tabPane" id="tab-guardrails"><div class="chipCloud" id="guardrails"></div></div>
+            <div class="tabPane" id="tab-validation"><div id="validationRules"></div></div>
+            <div class="tabPane" id="tab-history"><div id="history"></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="panel glass outputPanel">
+        <div class="panelHead"><div><h3>Run & Output</h3><p>Runs local deterministic project engine first. LLM provider expands only when configured.</p></div></div>
+        <div class="runBar">
+          <select id="outputStyle"><option>Executive report</option><option>Strict JSON/API output</option><option>Checklist + implementation plan</option><option>Client-ready document</option><option>Audit / compliance review</option></select>
+          <button id="runBtn">Run Workflow</button>
+          <button class="secondary" id="clearBtn">Clear</button>
+          <button class="ghost" data-export="md">Export MD</button>
+          <button class="ghost" data-export="json">Export JSON</button>
+          <button class="ghost" data-export="pdf">Export PDF</button>
+          <button class="ghost" data-export="docx">Export DOCX</button>
+        </div>
+        <div id="runStatus" class="statusLine"></div>
+        <div class="outputTabs"><button class="outputTab active" data-output-tab="markdown">Markdown</button><button class="outputTab" data-output-tab="structured">Structured View</button><button class="outputTab" data-output-tab="checklist">Action Checklist</button></div>
+        <div id="output" class="output"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="settingsModal">
+    <div class="modalPanel glass">
+      <div class="modalHead"><div><h2>Provider Settings</h2><p>Add API keys, local endpoints, model names, and routing preferences.</p></div><button class="secondary" id="closeSettings">Close</button></div>
+      <div class="providerHelp"><b>Rule Engine</b> runs locally without API keys. OpenAI-compatible local providers include Ollama, LM Studio, vLLM, and custom endpoints.</div>
+      <div id="providersEditor"></div>
+      <div class="runBar"><button id="addProvider">Add Custom Provider</button><button class="secondary" id="saveProviders">Save Providers</button></div>
+      <p class="muted">Keys are encrypted locally in <code>./data/ai_suite.sqlite3</code> using <code>./data/secret.key</code>. Keep the key private.</p>
+    </div>
+  </div>
+<script src="/static/app.js"></script>
+</body>
+</html>
